@@ -2,19 +2,9 @@ services:
   - type: web
     name: n8n-flowbot
     env: docker
-    # Render debería usar la imagen especificada en el Dockerfile o que configures en la UI
-    # image: n8nio/n8n:latest # Si hay campo para imagen, especifica aquí
-    # Si no hay campo de imagen, Render usa la del Dockerfile.
-    # En este caso, DEJAMOS EL START COMMAND VACÍO EN RENDER.
-    # El CMD del Dockerfile debería ser suficiente.
-    # dockerCommand: "" # Dejar vacío
+    # No incluyas `dockerCommand` ni `image` aquí; Render usará tu Dockerfile
     environment:
-      N8N_DATABASE_MODE: postgres
-      DATABASE_URL: "postgres://TU_USUARIO_NEON:TU_CONTRASENA_NEON@TU_HOST_NEON:5432/TU_NOMBRE_BD_NEON"
-      N8N_LOCAL_HOME: "/home/node/.n8n"
-      # Estas variables son las que n8n usará INTERNAMENTE para saber su puerto.
-      N8N_PORT: "8080"
-      N8N_WEBSERVER_PORT: "8080"
-      # Esta variable la usa Render para el tráfico externo y la pasa a la aplicación.
+      DATABASE_TYPE: "postgresdb"
+      DATABASE_URL:  "postgres://TU_USUARIO:TU_PASS@TU_HOST_NEON:5432/TU_BD"
+      N8N_LOCAL_FILES_ROOT: "/home/node/.n8n"
       PORT: "8080"
-      GENNARO_LISTEN_PORT: "8080"
