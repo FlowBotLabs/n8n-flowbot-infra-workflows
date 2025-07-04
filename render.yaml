@@ -5,6 +5,6 @@ services:
     # No incluyas `dockerCommand` ni `image` aquí; Render usará tu Dockerfile
     environment:
       DATABASE_TYPE: "postgresdb"
-      DATABASE_URL:  "postgres://TU_USUARIO:TU_PASS@TU_HOST_NEON:5432/TU_BD"
+      DATABASE_URL:  "psql 'postgresql://neondb_owner:npg_kX5tpy4COEJQ@ep-lucky-scene-a8tiogev-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require'"
       N8N_LOCAL_FILES_ROOT: "/home/node/.n8n"
       PORT: "8080"
