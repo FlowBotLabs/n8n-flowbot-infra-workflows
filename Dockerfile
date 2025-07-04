@@ -1,9 +1,12 @@
 # Usa la imagen oficial de n8n como base
 FROM n8nio/n8n:latest
 
-# Expón el puerto que n8n usará. Render lo mapeará a su propio $PORT
+# Expón el puerto que n8n usará internamente.
+# Render mapeará su $PORT a este puerto expuesto.
 EXPOSE 8080
 
-# Comando de inicio por defecto para n8n. Esto es lo que Render debería ejecutar.
-# Aseguramos que escucha en el host y puerto correcto.
-CMD ["node", "/usr/local/bin/n8n", "--host", "0.0.0.0", "--port", "8080", "--no- கருtype-check"]
+# El CMD en el Dockerfile es el comando por defecto.
+# n8n ya configura su propio CMD para escuchar en 8080.
+# Render DEBE respetar este CMD si no se sobrescribe incorrectamente.
+# Si Render sobrescribe con algo que falla, ahí está el problema.
+# PARA EVITAR SOBREESCRIBIR MAL: ¡DEJAREMOS EL CAMPO "Docker Command" EN RENDER VACÍO SI ES POSIBLE!
