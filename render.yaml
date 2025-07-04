@@ -1,16 +1,20 @@
 services:
   - type: web
-    name: n8n-flowbot # El nombre que le darás a tu servicio en Render
+    name: n8n-flowbot
     env: docker
-    dockerCommand: "npx n8n --host 0.0.0.0 --port $PORT --no- கருtype-check"
+    # Render debería usar la imagen especificada en el Dockerfile o que configures en la UI
+    # image: n8nio/n8n:latest # Si hay campo para imagen, especifica aquí
+    # Si no hay campo de imagen, Render usa la del Dockerfile.
+    # En este caso, DEJAMOS EL START COMMAND VACÍO EN RENDER.
+    # El CMD del Dockerfile debería ser suficiente.
+    # dockerCommand: "" # Dejar vacío
     environment:
       N8N_DATABASE_MODE: postgres
-      DATABASE_URL: postgresql://neondb_owner:npg_kX5tpy4COEJQ@ep-lucky-scene-a8tiogev-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require' # <-- ¡REEMPLAZA ESTO CON TU URL DE NEON!
+      DATABASE_URL: "postgres://TU_USUARIO_NEON:TU_CONTRASENA_NEON@TU_HOST_NEON:5432/TU_NOMBRE_BD_NEON"
       N8N_LOCAL_HOME: "/home/node/.n8n"
-      # Las siguientes son opcionales para el primer despliegue manual en Render,
-      # pero son buenas prácticas para un despliegue automatizado posterior.
-      # Si no estás seguro de la URL que te dará Render, puedes omitirlas por ahora
-      # y configurarlas manualmente en la UI de Render.
-      # N8N_HOST: "tu-nuevo-nombre-en-render.onrender.com" # <-- ¡REEMPLAZAR CON LA URL ASIGNADA POR RENDER!
-      # N8N_PORT: $PORT
-      # N8N_WEBSERVER_PORT: $PORT
+      # Estas variables son las que n8n usará INTERNAMENTE para saber su puerto.
+      N8N_PORT: "8080"
+      N8N_WEBSERVER_PORT: "8080"
+      # Esta variable la usa Render para el tráfico externo y la pasa a la aplicación.
+      PORT: "8080"
+      GENNARO_LISTEN_PORT: "8080"
